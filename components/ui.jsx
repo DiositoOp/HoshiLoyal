@@ -1,0 +1,34 @@
+export function Star({ size = 26 }) {
+  return (
+    <svg aria-hidden="true" width={size} height={size} viewBox="0 0 24 24" fill="currentColor">
+      <path d="M12 2.5l2.9 6 6.6.9-4.8 4.6 1.2 6.5L12 17.4l-5.9 3.1 1.2-6.5L2.5 9.4l6.6-.9z" />
+    </svg>
+  );
+}
+
+export function Logo() {
+  return (
+    <span className="logo">
+      <Star />
+    </span>
+  );
+}
+
+/** Tarjeta de sellos. small = una sola fila compacta (caja y pantalla de espera). */
+export function Stamps({ count, goal, dark = false, small = false }) {
+  const cols = small ? goal : 4;
+  return (
+    <div
+      className={`stamps${dark ? ' on-dark' : ''}${small ? ' small' : ''}`}
+      style={{ gridTemplateColumns: `repeat(${cols}, minmax(0, 1fr))` }}
+      role="img"
+      aria-label={`${count} de ${goal} sellos`}
+    >
+      {Array.from({ length: goal }, (_, i) => i + 1).map((n) => {
+        if (n <= count) return <span key={n} className="stamp filled">{!small && <Star size={30} />}</span>;
+        if (n === goal) return <span key={n} className="stamp prize">{!small && 'Premio'}</span>;
+        return <span key={n} className="stamp empty">{!small && n}</span>;
+      })}
+    </div>
+  );
+}
