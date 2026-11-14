@@ -16,7 +16,7 @@ export default async function MiTarjeta({ searchParams }) {
   if (!c) {
     return (
       <main className="screen white">
-        <Logo />
+        <Logo size={88} />
         <h1 className="display h1">Este teléfono aún no tiene tarjeta</h1>
         <p className="muted">
           Para registrarte, acerca tu teléfono a la etiqueta de tu mesa o escanea el código QR en {r.name}.
@@ -57,7 +57,7 @@ export default async function MiTarjeta({ searchParams }) {
           <span className="small muted">{nuevo ? 'Ya eres parte de la familia Hoshito' : pending ? 'Te reconocimos,' : 'Hola de nuevo,'}</span>
           <h1 className="display h1">{nuevo ? `¡Gracias, ${firstName}!` : pending ? `¡hola, ${firstName}!` : firstName}</h1>
         </div>
-        <Logo />
+        <Logo size={56} />
       </div>
 
       {nuevo && (
@@ -94,8 +94,11 @@ export default async function MiTarjeta({ searchParams }) {
       )}
 
       <div className="card dark">
-        <div className="row" style={{ alignItems: 'baseline' }}>
-          <span className="display h2">Tarjeta {r.name}</span>
+        <div className="row">
+          <span className="row" style={{ justifyContent: 'flex-start', gap: 10 }}>
+            <Logo size={40} decorative />
+            <span className="display h2">Tarjeta {r.name}</span>
+          </span>
           <span className="display" style={{ fontSize: 28 }}>
             {c.stamps} <span className="muted" style={{ fontSize: 16 }}>de {r.stamps_goal}</span>
           </span>

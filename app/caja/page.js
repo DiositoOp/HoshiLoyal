@@ -1,11 +1,11 @@
-import Link from 'next/link';
-import { ANY_STAFF, homeFor, requireRole } from '@/lib/auth';
+import { ANY_STAFF, requireRole } from '@/lib/auth';
 import { q } from '@/lib/db';
 import { clock, daysAgo, minutesAgo, onlyDigits, prettyPhone } from '@/lib/format';
 import { getRestaurant } from '@/lib/rules';
 import AutoRefresh from '@/components/AutoRefresh';
+import StaffHeader from '@/components/StaffHeader';
+import StaffTabs from '@/components/StaffTabs';
 import { Stamps } from '@/components/ui';
-import { logout } from '../staff/actions';
 import { confirmAction, deliverAction, linkCodeAction, manualStampAction, rejectAction } from './actions';
 
 export const dynamic = 'force-dynamic';
@@ -46,17 +46,11 @@ export default async function Caja({ searchParams }) {
     }
   }
 
-  return (
+  const content = (
     <main className="screen">
       <AutoRefresh seconds={5} />
 
-      <div className="row">
-        <h1 className="display h1">Caja</h1>
-        <div className="row" style={{ gap: 10 }}>
-          {staff.role !== 'cashier' && <Link className="small" href={homeFor(staff.role)}>Panel</Link>}
-          <form action={logout}><button className="linkbtn" type="submit">Salir ({staff.name})</button></form>
-        </div>
-      </div>
+      <StaffHeader title="Caja" staff={staff} />
 
       <div className="row" style={{ justifyContent: 'flex-start', gap: 8 }}>
         <span className="eyebrow">Visitas por confirmar</span>
@@ -170,6 +164,15 @@ export default async function Caja({ searchParams }) {
         </div>
       )}
     </main>
+  );
+
+  // Caja solo tiene esta pantalla; dueño y desarrollador ven también las pestañas del panel.
+  if (staff.role === 'cashier') return content;
+  return (
+    <div className="with-tabs">
+      {content}
+      <StaffTabs role={staff.role} pending={pending.length} />
+    </div>
   );
 }
 

@@ -5,7 +5,7 @@ export const metadata = {
   description: 'Programa de sellos de Hoshito, sushi japo-mex en Minatitlán.',
 };
 
-export const viewport = { width: 'device-width', initialScale: 1 };
+export const viewport = { width: 'device-width', initialScale: 1, themeColor: '#111114', viewportFit: 'cover' };
 
 export default function RootLayout({ children }) {
   return (

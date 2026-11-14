@@ -4,6 +4,7 @@ import { baseUrl } from '@/lib/baseurl';
 import { q } from '@/lib/db';
 import { dayAndClock } from '@/lib/format';
 import { getRestaurant } from '@/lib/rules';
+import { Logo } from '@/components/ui';
 import { logout } from '../staff/actions';
 import { addPoint, addStaff, saveConfig, setPassword, togglePoint, toggleStaff } from './actions';
 
@@ -32,18 +33,21 @@ export default async function DevConsole({ searchParams }) {
 
   return (
     <main className="dev">
-      <div className="row" style={{ flexWrap: 'wrap' }}>
-        <div className="stack" style={{ gap: 4 }}>
-          <h1 className="display h1">Consola del desarrollador</h1>
-          <span className="small muted">{r.name} · sesión de {staff.name}</span>
+      <header className="row" style={{ flexWrap: 'wrap' }}>
+        <div className="row" style={{ justifyContent: 'flex-start', gap: 14 }}>
+          <Logo size={52} decorative />
+          <div className="stack" style={{ gap: 4 }}>
+            <h1 className="display h1">Consola del desarrollador</h1>
+            <span className="small muted">{r.name} · sesión de {staff.name}</span>
+          </div>
         </div>
-        <div className="row" style={{ gap: 14, flexWrap: 'wrap' }}>
+        <nav aria-label="Secciones" className="row" style={{ gap: 8, flexWrap: 'wrap' }}>
           <span className="pill green">{process.env.DATABASE_URL ? 'Postgres conectado' : 'Base local de desarrollo'}</span>
-          <Link href="/caja">Caja</Link>
-          <Link href="/admin">Panel del dueño</Link>
-          <form action={logout}><button className="linkbtn" type="submit">Salir</button></form>
-        </div>
-      </div>
+          <Link className="btn ghost sm" href="/caja">Caja</Link>
+          <Link className="btn ghost sm" href="/admin">Panel del dueño</Link>
+          <form action={logout}><button className="btn sm" type="submit">Salir</button></form>
+        </nav>
+      </header>
 
       {aviso && <p className="notice" role="status" style={{ color: '#111114' }}>{aviso}</p>}
 

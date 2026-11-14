@@ -26,7 +26,7 @@ export default async function PuntoPage({ params }) {
   return (
     <main className="screen white">
       <div className="row" style={{ justifyContent: 'flex-start' }}>
-        <Logo />
+        <Logo size={64} decorative />
         <div className="stack" style={{ gap: 0 }}>
           <span className="display" style={{ fontSize: 22 }}>{r.name}</span>
           <span className="small muted">Sushi japo-mex · Minatitlán</span>

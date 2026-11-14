@@ -3,6 +3,7 @@ import { requireRole } from '@/lib/auth';
 import { q } from '@/lib/db';
 import { birthday, daysAgo, prettyPhone } from '@/lib/format';
 import { getRestaurant } from '@/lib/rules';
+import StaffHeader from '@/components/StaffHeader';
 
 const FILTERS = [
   ['todos', 'Todos'],
@@ -12,7 +13,7 @@ const FILTERS = [
 ];
 
 export default async function AdminClientes({ searchParams }) {
-  await requireRole(['owner', 'dev']);
+  const staff = await requireRole(['owner', 'dev']);
   const r = await getRestaurant();
   const sp = await searchParams;
   const f = FILTERS.some(([k]) => k === sp.f) ? sp.f : 'todos';
@@ -43,7 +44,7 @@ export default async function AdminClientes({ searchParams }) {
 
   return (
     <main className="screen">
-      <h1 className="display h1">Clientes</h1>
+      <StaffHeader title="Clientes" staff={staff} />
 
       <form action="/admin/clientes" method="get" className="row" style={{ gap: 8 }}>
         <input type="hidden" name="f" value={f} />

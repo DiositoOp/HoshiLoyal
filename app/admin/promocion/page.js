@@ -1,15 +1,16 @@
 import { requireRole } from '@/lib/auth';
 import { getRestaurant } from '@/lib/rules';
+import StaffHeader from '@/components/StaffHeader';
 import { savePromo } from './actions';
 
 export default async function AdminPromocion({ searchParams }) {
-  await requireRole(['owner', 'dev']);
+  const staff = await requireRole(['owner', 'dev']);
   const r = await getRestaurant();
   const { ok } = await searchParams;
 
   return (
     <main className="screen">
-      <h1 className="display h1">Promoción</h1>
+      <StaffHeader title="Promoción" staff={staff} />
       <p className="muted">Lo que cambies aquí se ve de inmediato en la tarjeta de todos los clientes.</p>
       {ok && <p className="notice green">Cambios guardados.</p>}
 

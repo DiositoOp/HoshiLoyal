@@ -11,7 +11,7 @@ export default async function LoginPage() {
   if (staff) redirect(homeFor(staff.role));
   return (
     <main className="screen white">
-      <Logo />
+      <Logo size={88} />
       <h1 className="display h1">Acceso del personal</h1>
       <LoginForm />
     </main>

@@ -2,8 +2,7 @@ import Link from 'next/link';
 import { requireRole } from '@/lib/auth';
 import { q } from '@/lib/db';
 import { getRestaurant } from '@/lib/rules';
-import { Logo } from '@/components/ui';
-import { logout } from '../staff/actions';
+import StaffHeader from '@/components/StaffHeader';
 
 export default async function AdminResumen() {
   const staff = await requireRole(['owner', 'dev']);
@@ -31,13 +30,8 @@ export default async function AdminResumen() {
 
   return (
     <main className="screen">
-      <div className="row">
-        <div className="stack" style={{ gap: 2 }}>
-          <h1 className="display h1">Últimos 7 días</h1>
-          <span className="small muted">{r.name} · {staff.name}</span>
-        </div>
-        <Logo />
-      </div>
+      <StaffHeader title="Resumen" staff={staff} />
+      <h2 className="eyebrow">Últimos 7 días</h2>
 
       <div className="kpis">
         <div className="kpi"><span className="small muted">Clientes registrados</span><span className="num">{s.customers}</span><span className="small" style={{ color: 'var(--green)', fontWeight: 600 }}>{s.new_customers} nuevos</span></div>
@@ -47,9 +41,9 @@ export default async function AdminResumen() {
       </div>
 
       <div className="card flat">
-        <Link className="list-row" href="/admin/clientes?f=cumple"><span>Cumpleaños este mes</span><strong>{s.birthdays}</strong></Link>
-        <Link className="list-row" href="/admin/clientes?f=inactivos"><span>Sin venir en más de 30 días</span><strong>{s.inactive}</strong></Link>
-        <Link className="list-row" href="/caja"><span>Premios por entregar</span><strong>{s.to_deliver}</strong></Link>
+        <Link className="list-row" href="/admin/clientes?f=cumple"><span>Cumpleaños este mes</span><span className="row-end"><strong>{s.birthdays}</strong><Chevron /></span></Link>
+        <Link className="list-row" href="/admin/clientes?f=inactivos"><span>Sin venir en más de 30 días</span><span className="row-end"><strong>{s.inactive}</strong><Chevron /></span></Link>
+        <Link className="list-row" href="/caja"><span>Premios por entregar</span><span className="row-end"><strong>{s.to_deliver}</strong><Chevron /></span></Link>
       </div>
 
       <div className="card">
@@ -67,12 +61,14 @@ export default async function AdminResumen() {
           <Link className="btn light sm" href="/admin/promocion">Editar</Link>
         </div>
       </div>
-
-      <div className="row push">
-        <Link className="small" href="/caja">Ir a caja</Link>
-        {staff.role === 'dev' && <Link className="small" href="/dev">Consola</Link>}
-        <form action={logout}><button className="linkbtn" type="submit">Salir</button></form>
-      </div>
     </main>
+  );
+}
+
+function Chevron() {
+  return (
+    <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M9 6l6 6-6 6" />
+    </svg>
   );
 }

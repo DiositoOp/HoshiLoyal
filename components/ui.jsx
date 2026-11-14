@@ -6,11 +6,17 @@ export function Star({ size = 26 }) {
   );
 }
 
-export function Logo() {
+/** Logo de Hoshi Sushi Roll (public/logo.png). decorative = sin texto alternativo cuando el nombre ya está escrito al lado. */
+export function Logo({ size = 48, decorative = false }) {
   return (
-    <span className="logo">
-      <Star />
-    </span>
+    // eslint-disable-next-line @next/next/no-img-element
+    <img
+      className="logo"
+      src="/logo.png"
+      width={size}
+      height={size}
+      alt={decorative ? '' : 'Hoshi Sushi Roll'}
+    />
   );
 }
 
