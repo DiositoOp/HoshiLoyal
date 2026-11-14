@@ -24,7 +24,8 @@ export default async function AdminResumen() {
       (select count(*)::int from visits v join customers c on c.id = v.customer_id
          where c.restaurant_id = $1 and v.manual and v.decided_at > now() - interval '7 days') as manual,
       (select count(*)::int from visits v join customers c on c.id = v.customer_id
-         where c.restaurant_id = $1 and v.status = 'rejected' and v.decided_at > now() - interval '7 days') as rejected`,
+         where c.restaurant_id = $1 and v.status = 'rejected' and v.decided_at > now() - interval '7 days') as rejected,
+      (select count(*)::int from events where restaurant_id = $1 and type = 'ajuste' and at > now() - interval '7 days') as adjustments`,
     [r.id, r.stamps_goal, r.tz],
   );
 
@@ -50,6 +51,7 @@ export default async function AdminResumen() {
         <span className="eyebrow">Revisar</span>
         <div className="row small"><span>Sellos dados a mano por caja</span><strong>{s.manual}</strong></div>
         <div className="row small"><span>Visitas rechazadas</span><strong>{s.rejected}</strong></div>
+        <div className="row small"><span>Sellos corregidos por el dueño</span><strong>{s.adjustments}</strong></div>
       </div>
 
       <div className="card dark">

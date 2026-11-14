@@ -66,7 +66,7 @@ export default async function AdminClientes({ searchParams }) {
           const inactive = c.last_visit_at && Date.now() - new Date(c.last_visit_at).getTime() > 30 * 86_400_000;
           const bday = birthday(c.birth_day, c.birth_month);
           return (
-            <div className="card" key={c.id} style={{ padding: '12px 14px', borderRadius: 14, gap: 4 }}>
+            <Link className="card client-link" key={c.id} href={`/admin/clientes/${c.id}`} style={{ padding: '12px 14px', borderRadius: 14, gap: 4, textDecoration: 'none' }}>
               <div className="row">
                 <strong>{c.name}</strong>
                 {c.rewards > 0
@@ -77,7 +77,7 @@ export default async function AdminClientes({ searchParams }) {
                 {prettyPhone(c.phone)} · {daysAgo(c.last_visit_at)}{bday ? ` · cumple ${bday}` : ''}
               </span>
               {c.address && <span className="small muted">{c.address}</span>}
-            </div>
+            </Link>
           );
         })}
       </div>

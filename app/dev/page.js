@@ -11,7 +11,7 @@ import { addPoint, addStaff, saveConfig, setPassword, togglePoint, toggleStaff }
 export const dynamic = 'force-dynamic';
 export const metadata = { title: 'Consola del desarrollador · Hoshito' };
 
-const EVENT_COLOR = { sello: '#bfe8cc', registro: '#bfe8cc', vinculo: '#bfe8cc', canje: '#ffd9cf', sello_manual: '#ffd9cf', config: '#b4b4be', rechazo: '#ffb4a3', bloqueado: '#ffb4a3' };
+const EVENT_COLOR = { ajuste: '#ffd9cf', edicion: '#b4b4be', sello: '#bfe8cc', registro: '#bfe8cc', vinculo: '#bfe8cc', canje: '#ffd9cf', sello_manual: '#ffd9cf', config: '#b4b4be', rechazo: '#ffb4a3', bloqueado: '#ffb4a3' };
 
 export default async function DevConsole({ searchParams }) {
   const staff = await requireRole(['dev']);

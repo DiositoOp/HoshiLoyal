@@ -22,11 +22,10 @@ export function Logo({ size = 48, decorative = false }) {
 
 /** Tarjeta de sellos. small = una sola fila compacta (caja y pantalla de espera). */
 export function Stamps({ count, goal, dark = false, small = false }) {
-  const cols = small ? goal : 4;
   return (
     <div
       className={`stamps${dark ? ' on-dark' : ''}${small ? ' small' : ''}`}
-      style={{ gridTemplateColumns: `repeat(${cols}, minmax(0, 1fr))` }}
+      style={{ gridTemplateColumns: small ? `repeat(${goal}, minmax(0, 32px))` : 'repeat(4, minmax(0, 1fr))' }}
       role="img"
       aria-label={`${count} de ${goal} sellos`}
     >
