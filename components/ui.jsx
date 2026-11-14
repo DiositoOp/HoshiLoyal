@@ -31,7 +31,14 @@ export function Stamps({ count, goal, dark = false, small = false }) {
       aria-label={`${count} de ${goal} sellos`}
     >
       {Array.from({ length: goal }, (_, i) => i + 1).map((n) => {
-        if (n <= count) return <span key={n} className="stamp filled">{!small && <Star size={30} />}</span>;
+        if (n <= count) {
+          return (
+            <span key={n} className="stamp filled">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              {!small && <img className="stamp-logo" src="/logo.png" alt="" />}
+            </span>
+          );
+        }
         if (n === goal) return <span key={n} className="stamp prize">{!small && 'Premio'}</span>;
         return <span key={n} className="stamp empty">{!small && n}</span>;
       })}

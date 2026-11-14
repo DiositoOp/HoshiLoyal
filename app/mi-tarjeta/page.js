@@ -95,10 +95,7 @@ export default async function MiTarjeta({ searchParams }) {
 
       <div className="card dark">
         <div className="row">
-          <span className="row" style={{ justifyContent: 'flex-start', gap: 10 }}>
-            <Logo size={40} decorative />
-            <span className="display h2">Tarjeta {r.name}</span>
-          </span>
+          <span className="display h2">Tarjeta {r.name}</span>
           <span className="display" style={{ fontSize: 28 }}>
             {c.stamps} <span className="muted" style={{ fontSize: 16 }}>de {r.stamps_goal}</span>
           </span>
