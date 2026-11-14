@@ -7,9 +7,10 @@ import { getRestaurant } from '@/lib/rules';
 import { Logo } from '@/components/ui';
 import { logout } from '../staff/actions';
 import { addPoint, addStaff, saveConfig, setPassword, togglePoint, toggleStaff } from './actions';
+import { STAFF_APP } from '@/lib/appMeta';
 
 export const dynamic = 'force-dynamic';
-export const metadata = { title: 'Consola del desarrollador · Hoshito' };
+export const metadata = { title: 'Consola del desarrollador · Hoshito', ...STAFF_APP };
 
 const EVENT_COLOR = { ajuste: '#ffd9cf', edicion: '#b4b4be', sello: '#bfe8cc', registro: '#bfe8cc', vinculo: '#bfe8cc', canje: '#ffd9cf', sello_manual: '#ffd9cf', config: '#b4b4be', rechazo: '#ffb4a3', bloqueado: '#ffb4a3' };
 

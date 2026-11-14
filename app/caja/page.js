@@ -7,9 +7,10 @@ import StaffHeader from '@/components/StaffHeader';
 import StaffTabs from '@/components/StaffTabs';
 import { Stamps } from '@/components/ui';
 import { confirmAction, deliverAction, linkCodeAction, manualStampAction, rejectAction } from './actions';
+import { STAFF_APP } from '@/lib/appMeta';
 
 export const dynamic = 'force-dynamic';
-export const metadata = { title: 'Caja · Hoshito' };
+export const metadata = { title: 'Caja · Hoshito', ...STAFF_APP };
 
 export default async function Caja({ searchParams }) {
   const staff = await requireRole(ANY_STAFF);

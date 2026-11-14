@@ -1,8 +1,10 @@
 import './globals.css';
+import { CUSTOMER_APP } from '@/lib/appMeta';
 
 export const metadata = {
   title: 'Hoshito · Tarjeta de cliente frecuente',
   description: 'Programa de sellos de Hoshito, sushi japo-mex en Minatitlán.',
+  ...CUSTOMER_APP,
 };
 
 export const viewport = { width: 'device-width', initialScale: 1, themeColor: '#111114', viewportFit: 'cover' };
